@@ -1,0 +1,42 @@
+<?php
+session_start();
+$_SESSION['count']=1;
+$_SESSION['like']=0;
+echo $_SESSION['count'].' '.$_SESSION['like'];
+?>
+
+<html>
+<head>
+<script src="https://code.jquery.com/jquery1.4.1.min.js"></script>
+<script>
+function showHint() {
+//var a = smtg.text.value;
+//if (a.length == 0) {
+//document.getElementById("txtHint").innerHTML = "";
+//return;
+//} else {
+	/*$('.click').click(function() {
+    // get the contents of the link that was clicked
+    $(this).text() = "Unlike";
+}*/
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+}
+}
+xmlhttp.open("GET", "gethint.php", true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+<p><b>Start typing a name in the input field below:</b></p>
+<form name = "smtg">
+First name: <input type="text" name="text">
+<span class="click"><a href = '#' onclick="showHint()">like</a></span>
+<!-- onkeyup="showHint(this.value)"> -->
+</form>
+<p><span id="txtHint"></span></p>
+</body>
+</html>
